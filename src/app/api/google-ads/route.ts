@@ -98,6 +98,7 @@ export async function GET(request: NextRequest) {
       {
         success: false,
         error: message,
+        codes: googleAdsErrors,
       },
       { status: authError ? 401 : 502 }
     );

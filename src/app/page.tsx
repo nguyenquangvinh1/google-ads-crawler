@@ -89,7 +89,10 @@ export default function Dashboard() {
       }
 
       if (!dataJson.success) {
-        throw new Error(dataJson.error || "Failed to fetch data");
+        const codes = Array.isArray(dataJson.codes)
+          ? dataJson.codes.map((detail: { category: string; code: string | number }) => `${detail.category}: ${detail.code}`).join(", ")
+          : "";
+        throw new Error(`${dataJson.error || "Failed to fetch data"}${codes ? ` (${codes})` : ""}`);
       }
 
       setData(dataJson.data);

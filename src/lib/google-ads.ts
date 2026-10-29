@@ -18,9 +18,11 @@ async function getCustomer() {
   const session = await readSession();
   if (!session.customerId) throw new AdsAuthError("Vui lòng chọn tài khoản Google Ads");
   const api = getClient();
+  const loginCustomerId = process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID?.replace(/-/g, "").trim();
   return api.Customer({
     customer_id: session.customerId,
     refresh_token: session.refreshToken,
+    ...(loginCustomerId ? { login_customer_id: loginCustomerId } : {}),
   });
 }
 
