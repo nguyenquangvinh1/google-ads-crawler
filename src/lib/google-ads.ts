@@ -117,7 +117,7 @@ export async function getCampaignPerformance(
     ORDER BY metrics.impressions DESC
   `);
 
-  return campaigns.map((row: Record<string, unknown>) => {
+  return campaigns.map((row) => {
     const campaign = row.campaign as Record<string, unknown>;
     const metrics = row.metrics as Record<string, unknown>;
     const segments = row.segments as Record<string, unknown>;
@@ -166,7 +166,7 @@ export async function getKeywordPerformance(
     LIMIT 500
   `);
 
-  return keywords.map((row: Record<string, unknown>) => {
+  return keywords.map((row) => {
     const criterion = row.ad_group_criterion as Record<string, unknown>;
     const keyword = criterion.keyword as Record<string, unknown>;
     const qualityInfo = criterion.quality_info as Record<string, unknown> | undefined;
@@ -217,7 +217,7 @@ export async function getSearchTermsReport(
     LIMIT 500
   `);
 
-  return searchTerms.map((row: Record<string, unknown>) => {
+  return searchTerms.map((row) => {
     const stv = row.search_term_view as Record<string, unknown>;
     const criterion = row.ad_group_criterion as Record<string, unknown>;
     const keyword = criterion?.keyword as Record<string, unknown>;
@@ -262,7 +262,7 @@ export async function getConversions(
     ORDER BY segments.date DESC
   `);
 
-  return conversions.map((row: Record<string, unknown>, index: number) => {
+  return conversions.map((row, index) => {
     const campaign = row.campaign as Record<string, unknown>;
     const adGroup = row.ad_group as Record<string, unknown>;
     const convAction = row.conversion_action as Record<string, unknown>;
@@ -308,7 +308,7 @@ export async function getAdGroupPerformance(
     LIMIT 200
   `);
 
-  return adGroups.map((row: Record<string, unknown>) => {
+  return adGroups.map((row) => {
     const adGroup = row.ad_group as Record<string, unknown>;
     const campaign = row.campaign as Record<string, unknown>;
     const metrics = row.metrics as Record<string, unknown>;
@@ -360,7 +360,7 @@ export async function getAccountSummary(
   }
 
   const totals = summary.reduce(
-    (acc: Record<string, number>, row: Record<string, unknown>) => {
+    (acc, row) => {
       const metrics = row.metrics as Record<string, unknown>;
       return {
         impressions: acc.impressions + Number(metrics.impressions ?? 0),

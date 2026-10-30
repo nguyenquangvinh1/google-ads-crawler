@@ -360,7 +360,7 @@ export default function Dashboard() {
                           borderRadius: "8px",
                           fontSize: "12px",
                         }}
-                        formatter={(value: number) => formatCurrency(value)}
+                        formatter={(value) => typeof value === "number" ? formatCurrency(value) : "—"}
                       />
                     </PieChart>
                   </ResponsiveContainer>
